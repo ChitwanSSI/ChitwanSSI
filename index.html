@@ -26,8 +26,6 @@
       display: block;
       position: relative;
       z-index: 1;
-      /* To enable sticky cropping */
-      clip-path: inset(0 0 0 0);
     }
     /* Sticky overlay for the top half of the banner */
     .banner-sticky-half {
@@ -36,7 +34,7 @@
       width: 100%;
       height: 125px; /* Half of banner height */
       z-index: 3;
-      pointer-events: none; /* Allow section below to be interactive */
+      pointer-events: none;
       overflow: hidden;
       display: flex;
       align-items: flex-end;
@@ -83,6 +81,42 @@
       color: #174078;
       letter-spacing: 1px;
     }
+    /* Featured Products Grid - 2 columns desktop, 1 column mobile */
+    .featured-products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .featured-product-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1px 8px #0001;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+      overflow: hidden;
+      min-height: 300px;
+      /* The card's height is determined by aspect-ratio on mobile */
+    }
+    .featured-product-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      flex: 1 1 auto;
+      background: #eaeaea;
+    }
+    .featured-product-name {
+      font-size: 1.12rem;
+      font-weight: 500;
+      color: #222;
+      text-align: center;
+      margin: 0.7rem 0 1.1rem 0;
+      letter-spacing: 0.5px;
+    }
+    /* All Products Grid - 3 columns desktop, 2 columns mobile */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -95,21 +129,16 @@
       box-shadow: 0 1px 8px #0001;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 1rem;
-      transition: transform 0.14s;
-    }
-    .product-card:hover {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 4px 16px #0002;
+      align-items: stretch;
+      padding: 0;
+      overflow: hidden;
+      min-height: 220px;
     }
     .product-image {
       width: 100%;
-      max-width: 170px;
-      aspect-ratio: 1/1;
+      height: 170px;
       object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 0.7rem;
+      display: block;
       background: #eaeaea;
     }
     .product-name {
@@ -117,14 +146,10 @@
       font-weight: 500;
       color: #222;
       text-align: center;
-      margin-bottom: 0.2rem;
+      margin: 0.7rem 0 1rem 0;
       letter-spacing: 0.5px;
     }
     @media (max-width: 900px) {
-      .products-grid {
-        grid-template-columns: 1fr;
-        gap: 1.3rem;
-      }
       .banner-container, .banner-image, .banner-half-image {
         height: 120px;
       }
@@ -136,6 +161,52 @@
         padding: 0.6rem 1.2rem;
         left: 1rem;
         bottom: 0.5rem;
+      }
+      .section {
+        padding: 0 0.3rem;
+      }
+    }
+    @media (max-width: 700px) {
+      .featured-products-grid {
+        grid-template-columns: 1fr;
+        gap: 1.1rem;
+      }
+      .featured-product-card {
+        min-height: 320px;
+        /* Make the card aspect ratio 1:1 for image to fill box */
+        aspect-ratio: 1/1;
+      }
+      .featured-product-image {
+        height: 100%;
+        min-height: 200px;
+        aspect-ratio: 1/1;
+      }
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.1rem;
+      }
+      .product-card {
+        min-height: 165px;
+      }
+      .product-image {
+        height: 100px;
+      }
+    }
+    @media (max-width: 480px) {
+      .featured-product-card {
+        min-height: 220px;
+      }
+      .featured-product-image {
+        min-height: 120px;
+      }
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .product-card {
+        min-height: 120px;
+      }
+      .product-image {
+        height: 80px;
       }
     }
     .contact-section {
@@ -176,30 +247,30 @@
 
   <section class="section">
     <div class="section-title">Featured Products</div>
-    <div class="products-grid">
-      <div class="product-card">
-        <img class="product-image" src="images/smart_bottle_1000ml.JPG" alt="Smart Water Bottles">
-        <div class="product-name">Smart Water Bottles</div>
+    <div class="featured-products-grid">
+      <div class="featured-product-card">
+        <img class="featured-product-image" src="images/smart_bottle_1000ml.JPG" alt="Smart Water Bottles">
+        <div class="featured-product-name">Smart Water Bottles</div>
       </div>
-      <div class="product-card">
-        <img class="product-image" src="images/tiger_stools.JPG" alt="Tiger Stools">
-        <div class="product-name">Tiger Stools</div>
+      <div class="featured-product-card">
+        <img class="featured-product-image" src="images/tiger_stools.JPG" alt="Tiger Stools">
+        <div class="featured-product-name">Tiger Stools</div>
       </div>
-      <div class="product-card">
-        <img class="product-image" src="images/deluxe_rack.JPG" alt="Deluxe Rack">
-        <div class="product-name">Deluxe Rack</div>
+      <div class="featured-product-card">
+        <img class="featured-product-image" src="images/deluxe_rack.JPG" alt="Deluxe Rack">
+        <div class="featured-product-name">Deluxe Rack</div>
       </div>
-      <div class="product-card">
-        <img class="product-image" src="images/ssi_logo_tiger.JPG" alt="Tiger Product 4">
-        <div class="product-name">Tiger Product 4</div>
+      <div class="featured-product-card">
+        <img class="featured-product-image" src="images/ssi_logo_tiger.JPG" alt="Tiger Product 4">
+        <div class="featured-product-name">Tiger Product 4</div>
       </div>
-      <div class="product-card">
-        <img class="product-image" src="images/ssi_logo_tiger.JPG" alt="Tiger Product 5">
-        <div class="product-name">Tiger Product 5</div>
+      <div class="featured-product-card">
+        <img class="featured-product-image" src="images/ssi_logo_tiger.JPG" alt="Tiger Product 5">
+        <div class="featured-product-name">Tiger Product 5</div>
       </div>
-      <div class="product-card">
-        <img class="product-image" src="images/ssi_logo_tiger.JPG" alt="Tiger Product 6">
-        <div class="product-name">Tiger Product 6</div>
+      <div class="featured-product-card">
+        <img class="featured-product-image" src="images/ssi_logo_tiger.JPG" alt="Tiger Product 6">
+        <div class="featured-product-name">Tiger Product 6</div>
       </div>
     </div>
   </section>
