@@ -11,30 +11,69 @@
       background: #fafafa;
       color: #222;
     }
-    .banner {
+    /* Banner container with sticky effect for top half */
+    .banner-container {
+      position: relative;
       width: 100%;
       height: 250px;
-      background: url('images/ssi_banner.png') center center/cover no-repeat;
+      overflow: visible;
+      z-index: 2;
+    }
+    .banner-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      position: relative;
+      z-index: 1;
+      /* To enable sticky cropping */
+      clip-path: inset(0 0 0 0);
+    }
+    /* Sticky overlay for the top half of the banner */
+    .banner-sticky-half {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 125px; /* Half of banner height */
+      z-index: 3;
+      pointer-events: none; /* Allow section below to be interactive */
+      overflow: hidden;
       display: flex;
       align-items: flex-end;
       justify-content: left;
+    }
+    .banner-half-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      /* Only top half visible in sticky */
+      clip-path: inset(0 0 125px 0);
       position: relative;
-      box-shadow: 0 2px 10px #0002;
+      z-index: 3;
     }
     .banner-title {
+      position: absolute;
+      left: 2rem;
+      bottom: 1.5rem;
       background: rgba(255,255,255,0.85);
       padding: 1rem 2rem;
-      margin: 1.5rem;
       border-radius: 10px;
       font-size: 2rem;
       font-weight: bold;
       color: #2b2b2b;
       box-shadow: 0 2px 6px #5552;
+      z-index: 4;
+      pointer-events: auto;
     }
     .section {
       max-width: 1100px;
       margin: 2rem auto;
       padding: 0 1rem;
+      position: relative;
+      z-index: 5;
+      background: #fafafa;
     }
     .section-title {
       font-size: 1.7rem;
@@ -86,13 +125,17 @@
         grid-template-columns: 1fr;
         gap: 1.3rem;
       }
-      .banner {
-        height: 160px;
+      .banner-container, .banner-image, .banner-half-image {
+        height: 120px;
+      }
+      .banner-sticky-half {
+        height: 60px;
       }
       .banner-title {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         padding: 0.6rem 1.2rem;
-        margin: 1rem;
+        left: 1rem;
+        bottom: 0.5rem;
       }
     }
     .contact-section {
@@ -122,8 +165,13 @@
   </style>
 </head>
 <body>
-  <div class="banner">
+  <!-- Banner section: Full image at top, top half sticky on scroll -->
+  <div class="banner-container">
+    <img class="banner-image" src="images/ssi_banner.png" alt="SS Industries Banner">
     <span class="banner-title">SS Industries</span>
+    <div class="banner-sticky-half">
+      <img class="banner-half-image" src="images/ssi_banner.png" alt="SS Industries Banner Half">
+    </div>
   </div>
 
   <section class="section">
@@ -189,10 +237,10 @@
   <section class="contact-section">
     <div class="contact-title">Contact Us</div>
     <div class="contact-info">
-      <b>Phone:</b> <a href="tel:56524618">56524618</a>
+      <b>Phone:</b> <a href="tel:9855055159">9855055159</a>
     </div>
     <div class="contact-info">
-      <b>Email:</b> <a href="mailto:sanjaya.rotary@gmail.com">sanjaya.rotary@gmail.com</a>
+      <b>Email:</b> <a href="mailto:chitwanssi@emaildomain.com">chitwanssi@emaildomain.com</a>
     </div>
   </section>
 </body>
